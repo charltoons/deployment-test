@@ -40,5 +40,5 @@ jobs:
         run: |
           gh release create $RELEASE_VERSION --draft --target main --title \"Release ${{ env.RELEASE_VERSION }}\"
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
