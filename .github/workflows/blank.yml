@@ -15,15 +15,18 @@ jobs:
         with: 
           persist-credentials: true
           fetch-depth: 0
-      - name: Bump package version
+#      - name: Bump package version
+#        run: |
+#          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+#          git config --local user.name "github-actions[bot]"
+#          yarn version --patch
+#      - name: Push change
+#        uses: ad-m/github-push-action@master
+#        with:
+#          tags: true
+#          branch: ${{ github.ref }}
+#          github_token: ${{ github.token }}
+      - name: Create release
         run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          yarn version --patch
-      - name: Push change
-        uses: ad-m/github-push-action@master
-        with:
-          tags: true
-          branch: ${{ github.ref }}
-          github_token: ${{ github.token }}
+          yarn version
 
