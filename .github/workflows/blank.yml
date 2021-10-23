@@ -39,7 +39,7 @@ jobs:
       - name: Create release 
         run: |
           echo "Creating release $RELEASE_VERSION"
-          gh release create $RELEASE_VERSION --draft --target main --title \"Release ${{ env.RELEASE_VERSION }}\"
+          gh release create $RELEASE_VERSION --draft --target main --title \"Release $RELEASE_VERSION\"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
