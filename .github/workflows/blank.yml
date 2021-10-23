@@ -37,6 +37,8 @@ jobs:
           # Make RELEASE_VERSION available in subsequent steps
           echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_ENV
       - name: Create release 
-        run:
+        run: |
           gh release create $RELEASE_VERSION --draft --target main --title \"Release ${{ env.RELEASE_VERSION }}\"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
