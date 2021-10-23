@@ -15,31 +15,17 @@ jobs:
         with: 
           persist-credentials: true
           fetch-depth: 0
-#      - name: Bump package version
-#        run: |
-#          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-#          git config --local user.name "github-actions[bot]"
-#          yarn version --patch
-#      - name: Push change
-#        uses: ad-m/github-push-action@master
-#        with:
-#          tags: true
-#          branch: ${{ github.ref }}
-#          github_token: ${{ github.token }}
-      - name: Set release version
+      - name: Bump package version
         run: |
-          # Obtain package version from $npm_package_version and story in .version tmp file
-          yarn run version
-          # Set RELEASE_VERSION environment variable from .version tmp file
-          RELEASE_VERSION=$(cat .version)
-          # Cleanup tmp file
-          rm .version
-          # Make RELEASE_VERSION available in subsequent steps
-          echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_ENV
-      - name: Create release 
-        run: |
-          echo "Creating release $RELEASE_VERSION"
-          gh release create $RELEASE_VERSION --draft --target main --title \"Release $RELEASE_VERSION\"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          yarn version --patch
+      - name: Push change
+        uses: ad-m/github-push-action@master
+        with:
+          tags: true
+          branch: ${{ github.ref }}
+          github_token: ${{ github.token }}
+      - name: Log Version
+        run: yarn versions
 
