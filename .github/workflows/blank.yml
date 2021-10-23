@@ -26,7 +26,17 @@ jobs:
 #          tags: true
 #          branch: ${{ github.ref }}
 #          github_token: ${{ github.token }}
-      - name: Create release
+      - name: Set release version
         run: |
-          yarn version
+          # Obtain package version from $npm_package_version and story in .version tmp file
+          yarn run version
+          # Set RELEASE_VERSION environment variable from .version tmp file
+          RELEASE_VERSION=$(cat .version)
+          # Cleanup tmp file
+          rm .version
+          # Make RELEASE_VERSION available in subsequent steps
+          echo "::set-env name=RELEASE_VERSION::$RELEASE_VERSION"
+      - name: Create release 
+        run:
+          gh release create $RELEASE_VERSION --draft --target main --title \"Release $RELEASE_VERSION\""
 

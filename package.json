@@ -6,6 +6,6 @@
   "author": "Charlton Roberts <croberts@frame.io>",
   "license": "MIT",
   "scripts": {
-    "version": "echo $npm_package_version"
+    "version": "echo \"v$npm_package_version\" > .version"
   }
 }
