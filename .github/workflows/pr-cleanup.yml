@@ -17,6 +17,6 @@ jobs:
         with:
           node-version: '12.x'
       - name: Install dependencies
-        run: npm install typescript
+        run: npm install
       - name: Remove Deployment
         run: npx ts-node ./scripts/pr-cleanup.ts
