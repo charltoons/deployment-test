@@ -3,9 +3,10 @@ import * as github from '@actions/github';
 import { Octokit } from '@octokit/core';
 
 async function execute(){
-  const prNumber = github.context.issue
+  const prNumber = github.context.issue.number
   const environment = `pr-${prNumber}`
-  core.notice(`Removing environment ${environment}`)
+  console.log(`Removing environment ${environment}`)
+  core.notice(`Removed environment ${environment}`)
 }
 
 execute()
