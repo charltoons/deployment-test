@@ -3,7 +3,7 @@ name: PR Cleanup
 # trigger on pull request closed events (merge and closed)
 on:
   pull_request:
-    types: [ closed, edited ]
+    types: [ closed ]
 
 jobs:
   on_pull_request_closed_or_merged:
