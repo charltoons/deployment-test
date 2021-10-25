@@ -1,6 +1,6 @@
 name: PR Cleanup
 
-# trigger on pull request closed events (merge and closed)
+# Trigger on pull request closed events (merge and closed)
 on:
   pull_request:
     types: [ closed ]
@@ -8,6 +8,9 @@ on:
 jobs:
   delete_environment:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: scripts/github-actions
     steps:
       - uses: actions/checkout@v2
         with: 
@@ -15,10 +18,14 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
-      - name: Install dependencies
+          node-version: '12.22'
+        
+        # Dependencies to run this script. Use npm to save time.
+      - name: Install GitHub Actions script dependencies
         run: npm install
+
+        # Run the script
       - name: Delete Environment
-        run: npx ts-node ./scripts/pr-cleanup.ts
+        run: npx ts-node ./pr-cleanup.ts
         env: 
           GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_TOKEN }}
