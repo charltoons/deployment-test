@@ -3,7 +3,7 @@ import * as github from '@actions/github';
 import { Octokit } from '@octokit/core';
 
 async function execute(){
-
+  console.log('token', process.env.GITHUB_TOKEN)
   const octokit = github.getOctokit(process.env.GITHUB_TOKEN)
 
   const prNumber = github.context.issue.number
