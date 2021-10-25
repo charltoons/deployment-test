@@ -21,4 +21,4 @@ jobs:
       - name: Delete Environment
         run: npx ts-node ./scripts/pr-cleanup.ts
         env: 
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

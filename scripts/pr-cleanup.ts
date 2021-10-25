@@ -45,4 +45,10 @@ async function execute(){
   core.notice(`Deleted environment ${environmentName}`)
 }
 
-execute()
+try {
+  execute()
+}
+catch(e){
+  console.error(e)
+  process.exit(1)
+}
