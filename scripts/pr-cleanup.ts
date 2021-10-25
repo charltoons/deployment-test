@@ -3,8 +3,8 @@ import * as github from '@actions/github';
 import { Octokit } from '@octokit/core';
 
 async function execute(){
-  const ghToken = core.getInput('github_token');
-  const octokit = github.getOctokit(ghToken)
+
+  const octokit = github.getOctokit(process.env.GITHUB_TOKEN)
 
   const prNumber = github.context.issue.number
   const environmentName = `pr-${prNumber}`
