@@ -13,7 +13,7 @@ async function execute(){
   const environment = await octokit.graphql(`
     query GetEnvironment($repoName: String!, $repoOwner: String!, $environmentName: String!) { 
       repository(name: $repoName, owner: $repoOwner) { 
-        environment(name: $environmennName){
+        environment(name: $environmentName){
           id
           name
         }
