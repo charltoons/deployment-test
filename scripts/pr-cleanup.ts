@@ -35,15 +35,14 @@ async function execute(){
   // Delete environment
   await octokit.graphql<{ deleteEnvironment: DeleteEnvironmentPayload }>(`
     mutation DeleteEnvironment($environmentId: ID!) { 
-      deleteEnvironment(id: $environmentId) { 
+      deleteEnvironment(input: { id: $environmentId}) { 
         clientMutationId
       }
     }
   `, {
     environmentId: repository.environment.id
   });
-  
-  core.notice(`Removed environment ${environmentName}`)
+  core.notice(`Deleted environment ${environmentName}`)
 }
 
 execute()

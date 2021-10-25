@@ -6,7 +6,7 @@ on:
     types: [ closed ]
 
 jobs:
-  on_pull_request_closed_or_merged:
+  delete_environment:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: npm install
-      - name: Remove Deployment
+      - name: Delete Environment
         run: npx ts-node ./scripts/pr-cleanup.ts
         env: 
           GITHUB_TOKEN: ${{ github.token }}
