@@ -11,7 +11,7 @@ async function execute(){
 
   // Does environment exist?
   const environment = await octokit.graphql(`
-    query { 
+    query GetEnvironment($repoName: String!, $repoOwner: String!, $environmentName: String!) { 
       repository(name: $repoName, owner: $repoOwner) { 
         environment(name: $environemtnName){
           id
