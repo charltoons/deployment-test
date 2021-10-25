@@ -20,3 +20,5 @@ jobs:
         run: npm install
       - name: Remove Deployment
         run: npx ts-node ./scripts/pr-cleanup.ts
+        with: 
+          github_token: ${{ secrets.GITHUB_TOKEN }}

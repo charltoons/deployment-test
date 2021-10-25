@@ -3,10 +3,31 @@ import * as github from '@actions/github';
 import { Octokit } from '@octokit/core';
 
 async function execute(){
+  const ghToken = core.getInput('github_token');
+  const octokit = github.getOctokit(ghToken)
+
   const prNumber = github.context.issue.number
-  const environment = `pr-${prNumber}`
-  console.log(`Removing environment ${environment}`)
-  core.notice(`Removed environment ${environment}`)
+  const environmentName = `pr-${prNumber}`
+  console.log(`Removing environment ${environmentName}`)
+
+  // Does environment exist?
+  const environment = await octokit.graphql(`
+    query { 
+      repository(name: $repoName, owner: $repoOwner) { 
+        environment(name: $environemtnName){
+          id
+          name
+        }
+      }
+    }
+  `, {
+    repoName: github.context.repo.repo,
+    repoOwner: github.context.repo.owner,
+    environmentName
+  });
+
+  console.log(JSON.stringify(environment))
+  core.notice(`Removed environment ${environmentName}`)
 }
 
 execute()
